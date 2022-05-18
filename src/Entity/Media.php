@@ -52,12 +52,12 @@ class Media
         return $this;
     }
 
-    public function getTrick(): ?Tricks
+    public function getTrick(): Tricks
     {
         return $this->trick;
     }
 
-    public function setTrick(?Tricks $trick): self
+    public function setTrick(Tricks $trick): self
     {
         $this->trick = $trick;
 

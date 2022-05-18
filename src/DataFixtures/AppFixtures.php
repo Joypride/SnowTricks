@@ -38,7 +38,7 @@ class AppFixtures extends Fixture
 
         $manager->persist($admin);
 
-        for ($i = 0; $i <= 20; ++$i) {
+        for ($i = 0; $i <= 15; ++$i) {
             
             $faker = Factory::create();
             $user = new User();
@@ -100,14 +100,16 @@ class AppFixtures extends Fixture
 
                     $trickMedia->setUrl('https://images.unsplash.com/photo-1478700485868-972b69dc3fc4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80');
                     $trickMedia->setType(0);
+                    
 
                     $trick = new Tricks();
 
                     $trick->setName($trickName);
                     $trick->setDescription($faker->paragraph(3, 5));
-                    $trick->getMedia($trickMedia);
+                    // $trick->getMedia($trickMedia);
                     $trick->setCategory($groupTrick);
                     $trick->setUser($this->getReference('admin'));
+                    $trickMedia->setTrick($trick);
 
                     $manager->persist($trickMedia);
                     $manager->persist($trick);
@@ -125,10 +127,10 @@ class AppFixtures extends Fixture
 
     public function loadComments(ObjectManager $manager): void
     {
-        for ($count = 0; $count < 20; $count++) {
+        for ($i = 0; $i < 20; $i++) {
             $faker = Factory::create();
 
-            $randomNumber = rand(0, 19);
+            $randomNumber = rand(0, 15);
             $user = $this->getReference('user' . $randomNumber);
 
             $randomTrick = rand(0, 11);
@@ -149,7 +151,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $this->loadUsers($manager);
-        $this->loadComments($manager);
         $this->loadTricks($manager);
+        $this->loadComments($manager);
     }
 }
