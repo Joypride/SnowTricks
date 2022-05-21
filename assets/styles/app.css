@@ -31,6 +31,14 @@ a {
     margin: 15px 0;
 }
 
+/* HEADER */
+
+.nav-link {
+    color: #5B7075;
+}
+
+/* LOGIN / REGISTER */
+
 .login-container {
     background: #fff;
     border-radius: 10px;
@@ -79,8 +87,8 @@ a {
 
 button {
     border-radius: 20px;
-    border: 1px solid #ff4b2b;
-    background: #ff445c;
+    border: 1px solid #9bb4d4;
+    background: #9BC9D4;
     color: #fff;
     font-size: 12px;
     font-weight: bold;
@@ -135,8 +143,8 @@ button.ghost {
 }
 
 .overlay {
-    background: #ff416c;
-    background: linear-gradient(to right, #ff4b2b, #ff416c) no-repeat 0 0 / cover;
+    background: #80B1BD;
+    background: linear-gradient(to right, #9BC9D4, #80B1BD) no-repeat 0 0 / cover;
     color: #fff;
     position: relative;
     left: -100%;
@@ -171,34 +179,34 @@ button.ghost {
 }
 
 /* Move signin to right */
-.container.right-panel-active .sign-in-container {
+.login-container.right-panel-active .sign-in-container {
     transform: translateY(100%);
 }
 
 /* Move overlay to left */
-.container.right-panel-active .overlay-container {
+.login-container.right-panel-active .overlay-container {
     transform: translateX(-100%);
 }
 
 /* Bring signup over signin */
-.container.right-panel-active .sign-up-container {
+.login-container.right-panel-active .sign-up-container {
     transform: translateX(100%);
     opacity: 1;
     z-index: 5;
 }
 
 /* Move overlay back to right */
-.container.right-panel-active .overlay {
+.login-container.right-panel-active .overlay {
     transform: translateX(50%);
 }
 
 /* Bring back the text to center */
-.container.right-panel-active .overlay-left {
+.login-container.right-panel-active .overlay-left {
     transform: translateY(0);
 }
 
 /* Same effect for right */
-.container.right-panel-active .overlay-right {
+.login-container.right-panel-active .overlay-right {
     transform: translateY(20%);
 }
 
@@ -229,4 +237,13 @@ button.ghost {
     .sign-in-container {
         width: 100%;
     }
+}
+
+
+/* FOOTER */
+
+footer {
+    background-color: #2A3336;
+    margin-top: 50px;
+    color: #fff;
 }
