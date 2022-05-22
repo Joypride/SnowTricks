@@ -28,12 +28,6 @@ class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInt
     #[ORM\Column(type: 'string', length: 255)]
     private $password;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $name;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private $surname;
-
     #[ORM\Column(type: 'boolean')]
     private $isActivated;
 
@@ -90,30 +84,6 @@ class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInt
         return $this;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getSurname(): ?string
-    {
-        return $this->surname;
-    }
-
-    public function setSurname(string $surname): self
-    {
-        $this->surname = $surname;
-
-        return $this;
-    }
-
     public function getIsActivated(): ?bool
     {
         return $this->isActivated;
@@ -138,10 +108,6 @@ class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInt
 
     public function getPasswordHasherName(): ?string
     {
-        // if ($this->isAdmin()) {
-        //     return 'harsh';
-        // }
-
         return null; // use the default hasher
     }
 
@@ -163,7 +129,6 @@ class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInt
     {
         // Nous n'avons pas besoin de cette methode car nous n'utilions pas de plainPassword
         // Mais elle est obligatoire car comprise dans l'interface UserInterface
-        // $this->plainPassword = null;
     }
 
 

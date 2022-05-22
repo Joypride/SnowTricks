@@ -26,8 +26,6 @@ class AppFixtures extends Fixture
 
         $this->addReference('admin', $admin);
 
-        $admin->setSurname('Jimmy');
-        $admin->setName('Sweat');
         $admin->setUsername('Sweety');
         $admin->setEmail('jimmy.sweat@snowtricks.fr');
 
@@ -45,8 +43,6 @@ class AppFixtures extends Fixture
             $user->setUsername($faker->userName());
             $user->setEmail($faker->email());
             $user->setPassword($faker->password());
-            $user->setName($faker->lastName());
-            $user->setSurname($faker->firstName());
             $user->setIsActivated(true);
 
             $this->addReference('user'. $i, $user);

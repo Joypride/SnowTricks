@@ -15,5 +15,13 @@ class HomeController extends AbstractController
     {
         return $this->render('index.html.twig');
     }
+
+    /**
+    * @Route("/reinitialisation", name="forgot_password")
+    */
+    public function forgotPassword() : Response
+    {
+        return $this->render('forgot_password.html.twig');
+    }
 }
 

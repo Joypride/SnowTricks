@@ -22,7 +22,8 @@
 			<base
 			href="/"/>
 			<!-- Fontawesome -->
-			<script src="https://kit.fontawesome.com/885c50c641.js" crossorigin="anonymous"></script>
+			{# // <script src="https://kit.fontawesome.com/885c50c641.js" crossorigin="anonymous"></script> #}
+      <script src="https://kit.fontawesome.com/362e981ce3.js" crossorigin="anonymous"></script>
 
 			<!-- CSS -->
 			<link rel="stylesheet" type="text/css" href="{{ asset('build/app.css') }}"/>
@@ -32,33 +33,52 @@
 			{% block header %}
 				<nav class="navbar navbar-expand-md">
 					<div class="container">
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemon01" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<a class="navbar-brand" href="/"><img src="/img/logo2.png"></a>
-						<div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo01">
+						<a class="navbar-brand d-none d-lg-block" href="/"><img src="/img/logo.png"></a>           
+          
+            <!-- Mobile Nav -->
+            <div class="d-lg-none w-100">
+              <ul class="nav-link mobile-ul">
+                <li class="nav-item">
+                  <a class="nav-link" href="/"><i class="fas fa-home"></i></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/tricks"><i class="fa-solid fa-person-snowboarding"></i></a>
+                </li>
+                {% if session is defined and session.id is defined %}
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout"><i class="fa-solid fa-right-to-bracket"></i></a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket"></i></a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          <!-- End Mobile Nav -->
+
+						<div class="collapse navbar-collapse justify-content-end">
 							<ul class="menu menu-list navbar-nav position-absolute" id="menu-list">
 								<li class="nav-item">
-									<a class="nav-link" href="/">Accueil</a>
+									<a class="nav-link d-none d-sm-block" href="/">Accueil</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="#">Tricks</a>
+									<a class="nav-link" href="/tricks">Tricks</a>
 								</li>
 								{% if session is defined and session.id is defined %}
 									<li class="nav-item">
-										<a class="nav-link" href="/home/logout">Déconnexion</a>
+										<a class="nav-link" href="/logout">Déconnexion</a>
 									</li>
-							</ul>
-						</div>
-						{% else %}
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Connexion</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/user/login">Inscription</a>
-                </li>
+						    {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="/connexion">Connexion</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/inscription">Inscription</a>
+                  </li>
+                {% endif %}
               </ul>
-						{% endif %}
+            </div>
 				  </div>
         </nav>
     {% endblock %}
