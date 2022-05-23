@@ -26,17 +26,17 @@
       <script src="https://kit.fontawesome.com/362e981ce3.js" crossorigin="anonymous"></script>
 
 			<!-- CSS -->
-			<link rel="stylesheet" type="text/css" href="{{ asset('build/app.css') }}"/>
+			<link rel="stylesheet" type="text/css" href="css/app.css"/>
 		{% endblock %}
 	</head>
 	<body>
 			{% block header %}
 				<nav class="navbar navbar-expand-md">
 					<div class="container">
-						<a class="navbar-brand d-none d-lg-block" href="/"><img src="/img/logo.png"></a>           
+						<a class="navbar-brand d-none d-md-block" href="/"><img src="/img/logo.png"></a>           
           
             <!-- Mobile Nav -->
-            <div class="d-lg-none w-100">
+            <div class="d-md-none w-100">
               <ul class="nav-link mobile-ul">
                 <li class="nav-item">
                   <a class="nav-link" href="/"><i class="fas fa-home"></i></a>
@@ -98,7 +98,7 @@
     
     {% block javascripts %}
     <!-- Optional JavaScript -->
-    {{ encore_entry_script_tags('app') }}
+    <script src="js/app.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"> </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
