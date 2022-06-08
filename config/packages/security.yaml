@@ -5,7 +5,10 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory: { memory: null }
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
         #main:
         #    entity: { class: App\Entity\Security\User, property: username }
     firewalls:
@@ -14,12 +17,15 @@ security:
             security: false
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
             # custom_authenticator: App\Security\LoginFormAuthenticator
             form_login:
+                provider: app_user_provider
                 login_path: app_login
                 check_path: app_login
                 default_target_path: /
+            entry_point: form_login
+            custom_authenticator: App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
                 # where to redirect after logout
