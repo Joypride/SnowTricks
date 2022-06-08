@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Snowtricks - Connexion
+{% endblock %}
+
+{% block content %}
+	<form method="post">
+		{% if error %}
+			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+		{% endif %}
+
+		{% if app.user %}
+			<div class="mb-3">
+				Bonjour
+				{{ app.user.userIdentifier }},
+				<a href="{{ path('app_logout') }}">Logout</a>
+			</div>
+		{% endif %}
+
+		<div class="login-container" id="container">
+			<div class="form-container sign-in-container">
+				<h1>Se connecter</h1>
+				<div class="social-container">
+					<a href="#" class="social">
+						<i class="fab fa-facebook-f"></i>
+					</a>
+					<a href="#" class="social">
+						<i class="fab fa-google-plus-g"></i>
+					</a>
+					<a href="#" class="social">
+						<i class="fab fa-linkedin-in"></i>
+					</a>
+				</div>
+				<span>ou utilisez votre compte</span>
+				<input type="text" value="{{ last_username }}" name="_username" class="form-control" autocomplete="username" required autofocus placeholder="Pseudo">
+				<input type="password" name="_password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="Mot de passe">
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+				{# {{ form_widget(loginForm.username, {'attr': {'placeholder': 'Pseudo'}}) }} #}
+				{# {{ form_widget(loginForm.password, {'attr': {'placeholder': 'Mot de passe'}}) }} #}<a href="/reinitialisation"> Mot de passe oublié?</a>
+				<button type="submit">Connexion</button>
+			</div>
+			<div class="overlay-container">
+				<div class="overlay">
+					<div class="overlay-panel overlay-right">
+						<h1>Bienvenue !</h1>
+						<p>Vous n'avez pas encore de compte ? Créez-en un pour rejoindre la communauté Snowtricks</p>
+						<a href="/inscription">
+							<button class="ghost" id="signUp">S'inscrire</button>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{#
+		        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+		        See https://symfony.com/doc/current/security/remember_me.html
+		
+		        <div class="checkbox mb-3">
+		            <label>
+		                <input type="checkbox" name="_remember_me"> Remember me
+		            </label>
+		        </div>
+		    #}
+	</form>
+{% endblock %}

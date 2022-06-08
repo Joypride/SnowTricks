@@ -7,11 +7,13 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherAwareInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInterface, PasswordHasherAwareInterface
 {
     #[ORM\Id]
@@ -29,13 +31,16 @@ class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInt
     private $password;
 
     #[ORM\Column(type: 'boolean')]
-    private $isActivated;
+    private $isActivated = false;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Tricks::class, orphanRemoval: true)]
     private $tricks;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class, orphanRemoval: true)]
     private $comments;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
 
     public function __construct()
     {
@@ -204,7 +209,7 @@ class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInt
      */
     public function serialize(): string
     {
-        return serialize([$this->id, $this->username, $this->password, $this->isActivated]);
+        return serialize([$this->id, $this->username, $this->password, $this->isActivated, $this->isVerified]);
     }
  
     /**
@@ -212,6 +217,18 @@ class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInt
      */
     public function unserialize($serialized): void
     {
-        [$this->id, $this->username, $this->password, $this->isActivated] = unserialize($serialized);
+        [$this->id, $this->username, $this->password, $this->isActivated, $this->isVerified] = unserialize($serialized);
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
     }
 }
