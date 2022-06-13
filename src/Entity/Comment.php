@@ -23,7 +23,7 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 
-    #[ORM\ManyToOne(targetEntity: Tricks::class, inversedBy: 'comments')]
+    #[ORM\ManyToOne(targetEntity: Trick::class, inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
     private $trick;
 
@@ -68,12 +68,12 @@ class Comment
         return $this;
     }
 
-    public function getTrick(): ?Tricks
+    public function getTrick(): ?Trick
     {
         return $this->trick;
     }
 
-    public function setTrick(?Tricks $trick): self
+    public function setTrick(?Trick $trick): self
     {
         $this->trick = $trick;
 

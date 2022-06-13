@@ -37,6 +37,10 @@ a:hover {
 
 /* HEADER */
 
+.navbar {
+    z-index: 10;
+}
+
 .mobile-ul {
     display: flex;
     list-style: none;
@@ -267,6 +271,64 @@ button.ghost {
     }
 }
 
+/* HERO */
+
+#hero {
+    width: 100%;
+    height: 85vh;
+    background: url("../img/hero.jpg") center center;
+    background-size: cover;
+    position: relative;
+  }
+  #hero .container {
+    padding-top: 80px;
+  }
+  #hero h1 {
+    margin: 0 0 10px 0;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 56px;
+    color: #fff;
+  }
+  #hero h2 {
+    color: #eee;
+    margin-bottom: 40px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: "Open Sans", sans-serif;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .scroll-down {
+    position: absolute;
+    bottom: 0;
+    right: 15px;
+  }
+  @media (min-width: 1024px) {
+    #hero {
+      background-attachment: fixed;
+    }
+  }
+  @media (max-width: 768px) {
+    #hero {
+      height: 100vh;
+    }
+    #hero .container {
+      padding-top: 60px;
+    }
+    #hero h1 {
+      font-size: 32px;
+      line-height: 36px;
+    }
+  }
+
+/* TRICKS */
+
+.btn-custom {
+    background-color: #03989E;
+    color: #fff;
+    padding: 5px;
+}
 
 /* FOOTER */
 
@@ -274,8 +336,6 @@ footer {
     background-color: #2A3336;
     margin-top: 50px;
     color: #fff;
-    position: absolute;
-    bottom: 0;
 }
 
 @media screen and (max-width:767px) {

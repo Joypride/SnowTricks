@@ -5,7 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Comment;
 use App\Entity\Group;
 use App\Entity\Media;
-use App\Entity\Tricks;
+use App\Entity\Trick;
 use App\Entity\User;
 use DateTime;
 use Faker\Factory;
@@ -98,7 +98,7 @@ class AppFixtures extends Fixture
                     $trickMedia->setType(0);
                     
 
-                    $trick = new Tricks();
+                    $trick = new Trick();
 
                     $trick->setName($trickName);
                     $trick->setDescription($faker->paragraph(3, 5));

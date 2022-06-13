@@ -19,7 +19,7 @@ class Media
     #[ORM\Column(type: 'boolean')]
     private $type;
 
-    #[ORM\ManyToOne(targetEntity: Tricks::class, inversedBy: 'media')]
+    #[ORM\ManyToOne(targetEntity: Trick::class, inversedBy: 'media')]
     #[ORM\JoinColumn(nullable: false)]
     private $trick;
 
@@ -52,12 +52,12 @@ class Media
         return $this;
     }
 
-    public function getTrick(): Tricks
+    public function getTrick(): Trick
     {
         return $this->trick;
     }
 
-    public function setTrick(Tricks $trick): self
+    public function setTrick(Trick $trick): self
     {
         $this->trick = $trick;
 

@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Entity\Tricks;
+use App\Entity\Trick;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
@@ -33,7 +33,7 @@ class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInt
     #[ORM\Column(type: 'boolean')]
     private $isActivated = false;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Tricks::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Trick::class, orphanRemoval: true)]
     private $tricks;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class, orphanRemoval: true)]
@@ -145,14 +145,14 @@ class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInt
 
 
     /**
-     * @return Collection<int, Tricks>
+     * @return Collection<int, Trick>
      */
     public function getTricks(): Collection
     {
         return $this->tricks;
     }
 
-    public function addTrick(Tricks $trick): self
+    public function addTrick(Trick $trick): self
     {
         if (!$this->tricks->contains($trick)) {
             $this->tricks[] = $trick;
@@ -162,7 +162,7 @@ class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInt
         return $this;
     }
 
-    public function removeTrick(Tricks $trick): self
+    public function removeTrick(Trick $trick): self
     {
         if ($this->tricks->removeElement($trick)) {
             // set the owning side to null (unless already changed)
