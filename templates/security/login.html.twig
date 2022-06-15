@@ -19,6 +19,7 @@
 
 		<div class="login-container" id="container">
 			<div class="form-container sign-in-container">
+				<div class="login-form">
 				<h1>Se connecter</h1>
 				<div class="social-container">
 					<a href="#" class="social">
@@ -35,9 +36,9 @@
 				<input type="text" value="{{ last_username }}" name="_username" class="form-control" autocomplete="username" required autofocus placeholder="Pseudo">
 				<input type="password" name="_password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="Mot de passe">
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-				{# {{ form_widget(loginForm.username, {'attr': {'placeholder': 'Pseudo'}}) }} #}
-				{# {{ form_widget(loginForm.password, {'attr': {'placeholder': 'Mot de passe'}}) }} #}<a href="/reinitialisation"> Mot de passe oublié?</a>
+				<a href="{{ path('app_forgot_password_request') }}"> Mot de passe oublié?</a>
 				<button type="submit">Connexion</button>
+			</div>
 			</div>
 			<div class="overlay-container">
 				<div class="overlay">
@@ -51,16 +52,5 @@
 				</div>
 			</div>
 		</div>
-
-		{#
-		        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-		        See https://symfony.com/doc/current/security/remember_me.html
-		
-		        <div class="checkbox mb-3">
-		            <label>
-		                <input type="checkbox" name="_remember_me"> Remember me
-		            </label>
-		        </div>
-		    #}
 	</form>
 {% endblock %}

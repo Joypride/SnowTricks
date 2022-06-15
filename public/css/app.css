@@ -88,7 +88,7 @@ a:hover {
     }
 }
 
-.form-container form {
+.form-container .login-form {
     background: #fff;
     display: flex;
     flex-direction: column;
@@ -325,9 +325,23 @@ button.ghost {
 /* TRICKS */
 
 .btn-custom {
+    color: #03989E;
+    border: 1px solid #03989E;
+}
+.btn-custom:hover {
     background-color: #03989E;
+}
+.card-title {
+    margin-bottom: 0;
+}
+.card-title:hover {
     color: #fff;
-    padding: 5px;
+}
+.card-body a {
+    margin-bottom: 0;
+}
+.card-body a:hover {
+    color: #fff;
 }
 
 /* FOOTER */

@@ -27,12 +27,11 @@
             <div class="card mt-5" style="width: 18rem;">
                 <img class="card-img-top" src="../img/trick1.jpg" alt="">
                 <div class="card-body d-flex">
-                  <h5 class="card-title">{{ trick.name }}</h5>
+                    <a href="/trick/detail/{id}" class="btn btn-custom mt-0"><h5 class="card-title">{{ trick.name }}</h5></a>
                   {% if app.user %}
                     <i class="fas fa-pencil-alt"></i>
                     <i class="fas fa-trash-alt"></i>
                   {% endif %}
-                  <a href="/trick/detail/{id}" class="btn btn-custom mt-0">Détail</a>
                 </div>
             </div>
             {% endfor %}

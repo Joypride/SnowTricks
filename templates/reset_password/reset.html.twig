@@ -6,10 +6,12 @@
 
 <div class="login-container" id="container">
     <div class="form-container sign-in-container">
-        <form action="#">
+        <form class="login-form" action="#">
             <h1>Mot de passe oublié ?</h1>
-            <input type="text" placeholder="Pseudo" />
-            <button>Réinitialiser</button>
+            {{ form_start(resetForm) }}
+            {{ form_row(resetForm.plainPassword) }}
+            <button class="btn btn-primary">Réinitialiser</button>
+            {{ form_end(resetForm) }}
         </form>
     </div>
     <div class="overlay-container">

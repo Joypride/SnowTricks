@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 
-
 class TrickController extends AbstractController
 {
     /**
@@ -28,6 +27,19 @@ class TrickController extends AbstractController
         return new Response('Saved new product with id '.$trick->getId());
     }
     
+    /**
+    * @Route("/trick/detail/{id}", name="trick_detail")
+    */
+    public function trickDetail(ManagerRegistry $doctrine) : Response
+    {
+        $repository = $doctrine->getRepository(Trick::class);
+        $tricks = $repository->findAll();
+
+        return $this->render('trick_detail.html.twig', [
+            'tricks' => $tricks
+        ]);
+    }
+
     /**
     * @Route("/modifier", name="modify_trick")
     */

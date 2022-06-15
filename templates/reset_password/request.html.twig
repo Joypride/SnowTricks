@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Snowtricks - Mot de passe oublié{% endblock %}
+
+{% block content %}
+    {% for flash_error in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <div class="login-container" id="container">
+        <div class="form-container sign-in-container">
+            <div class="login-form" action="#">
+                <h1>Mot de passe oublié ?</h1>
+                {{ form_start(requestForm) }}
+                {{ form_row(requestForm.email) }}
+                <div>
+                    <small>
+                        Enter your email address and we will send you a
+                        link to reset your password.
+                    </small>
+                </div>
+
+                <button class="btn btn-primary">Réinitialiser</button>
+                {{ form_end(requestForm) }}
+            </div>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <h1>Pas de panique!</h1>
+                    <p>Vous allez recevoir un email vous permettant d'être redirigé vers la page de modification de votre mot de passe.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1>Mot de passe oublié ?</h1>
+
+    
+{% endblock %}

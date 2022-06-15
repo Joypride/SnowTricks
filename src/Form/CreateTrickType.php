@@ -2,28 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\User;
+use App\Entity\Trick;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class LostPasswordType extends AbstractType
+class CreateTrickType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('username')
-            ->add('email')
-            ->add('password')
-            ->add('isActivated')
-            ->add('isVerified')
+            ->add('name')
+            ->add('description')
+            ->add('category')
+            ->add('user')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => Trick::class,
         ]);
     }
 }
