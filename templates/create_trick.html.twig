@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajouter un trick{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center mt-5">Ajouter un nouveau trick</h1>
+<div class="contentform">
+     
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            {{ form_start(form) }}
+            <div class="form-group">
+              <label class="label-form">Nom</label>
+              {{ form_widget(form.name) }}
+            </div>
+            <div class="row">
+              <div class= "col-md-6">
+                <div class="form-group">
+                    <input type="file" class="bug_cls" name="image" required="required" placeholder="Upload image"/>
+                </div>
+              </div>
+              <div class= "col-md-6">
+                <div class="form-group">
+                  <select type="text" class="form-control" name="category" required="required">
+                    <option value="">Catégorie</option>
+                    {% for c in category %}
+                    <option value="{{ c.id }}">{{ c.name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="label-form">Description</label>
+              {{ form_widget(form.description) }}
+            </div>
+            <div class="form-group">
+               <input type="submit" value="Ajouter" class="submit-form mt-4" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  
+</div>
+{% endblock %}

@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
     background: #f6f5f7;
@@ -28,7 +32,6 @@ a {
     color: #333;
     font-size: 14px;
     text-decoration: none;
-    margin: 15px 0;
 }
 
 a:hover {
@@ -275,7 +278,7 @@ button.ghost {
 
 #hero {
     width: 100%;
-    height: 85vh;
+    height: 89vh;
     background: url("../img/hero.jpg") center center;
     background-size: cover;
     position: relative;
@@ -301,7 +304,7 @@ button.ghost {
   }
   .scroll-down {
     position: absolute;
-    bottom: 0;
+    bottom: 15px;
     right: 15px;
   }
   @media (min-width: 1024px) {
@@ -330,19 +333,22 @@ button.ghost {
 }
 .btn-custom:hover {
     background-color: #03989E;
+    color: #fff;
 }
 .card-title {
     margin-bottom: 0;
 }
-.card-title:hover {
-    color: #fff;
+.card-body i {
+    margin-left: 10px;
+    margin-top: 5px;
 }
-.card-body a {
-    margin-bottom: 0;
+
+/* TRICKS DETAILS */
+.btn-comment {
+    margin: auto;
+    width: 20%;
 }
-.card-body a:hover {
-    color: #fff;
-}
+
 
 /* FOOTER */
 
