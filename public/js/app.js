@@ -6,11 +6,14 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.css';
+// import './styles/app.css';
 
 // start the Stimulus application
-import './bootstrap';
+// import './bootstrap';
 
+/**
+  * Load More Tricks
+  */
 
 $(document).ready(function(){
   $(".trick-content").slice(0, 6).show();
@@ -18,39 +21,47 @@ $(document).ready(function(){
     e.preventDefault();
     $(".trick-content:hidden").slice(0, 6).slideDown();
     if($(".trick-content:hidden").length == 0) {
-      $("#loadMore").text("No Content").addClass("noContent");
+      $("#loadMore").hide();
     }
   });
   
 })
 
 /**
-   * Porfolio isotope and filter
-   */
- window.addEventListener('load', () => {
-    let carouselContainer = select('.carousel-container');
-    if (carouselContainer) {
-      let carouselIsotope = new Isotope(carouselContainer, {
-        itemSelector: '.trick-item',
-        layoutMode: 'fitRows'
-      });
+  * Load More Comments
+  */
 
-      let carouselFilters = select('#carousel-filters li', true);
-
-      on('click', '#carousel-filters li', function(e) {
-        e.preventDefault();
-        carouselFilters.forEach(function(el) {
-          el.classList.remove('filter-active');
-        });
-        this.classList.add('filter-active');
-
-        carouselIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        carouselIsotope.on('arrangeComplete', function() {
-          AOS.refresh()
-        });
-      }, true);
+ $(document).ready(function(){
+  $(".comment-content").slice(0, 6).show();
+  $("#loadMoreComment").on("click", function(e){
+    e.preventDefault();
+    $(".comment-content:hidden").slice(0, 6).slideDown();
+    if($(".comment-content:hidden").length == 0) {
+      $("#loadMoreComment").hide();
     }
-
   });
+  
+})
+
+  /**
+   * Easy on scroll event listener 
+   */
+   const onscroll = (el, listener) => {
+    el.addEventListener('scroll', listener)
+  }
+
+  /**
+   * Back to top button
+   */
+   let backtotop = document.querySelector('.back-to-top')
+   if (backtotop) {
+     const toggleBacktotop = () => {
+       if (window.scrollY > 1200) {
+         backtotop.classList.add('active')
+       } else {
+         backtotop.classList.remove('active')
+       }
+     }
+     window.addEventListener('load', toggleBacktotop)
+     onscroll(document, toggleBacktotop)
+   }

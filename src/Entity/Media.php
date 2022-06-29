@@ -19,6 +19,9 @@ class Media
     #[ORM\Column(type: 'boolean')]
     private $type;
 
+    #[ORM\Column(type: 'boolean')]
+    private $main;
+
     #[ORM\ManyToOne(targetEntity: Trick::class, inversedBy: 'media')]
     #[ORM\JoinColumn(nullable: false)]
     private $trick;
@@ -48,6 +51,18 @@ class Media
     public function setType(bool $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getMain(): ?bool
+    {
+        return $this->main;
+    }
+
+    public function setMain(bool $main): self
+    {
+        $this->main = $main;
 
         return $this;
     }

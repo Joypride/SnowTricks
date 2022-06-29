@@ -3,12 +3,21 @@
 {% block title %}Snowtricks - Connexion{% endblock %}
 
 {% block content %}
-<!-- ======= Hero Section ======= -->
-<section id="hero" class="d-flex align-items-center img-fluid">
+<!-- Hero Section  -->
+{% for media in trick.medias %}
+        {% if media.main %}
+        <section id="hero-detail" class="d-flex align-items-center img-fluid" style="background-image: url('{{ media.url }}')">
+        {% endif %}
+    {% endfor %}
+    {% if app.user %}
+    <div class="wrap-icons">
+        <a href="#"><i class="fas fa-pencil-alt fa-1x"></i></a>
+        <a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-trash-alt fa-1x ml-3"></i></a>
+    </div>
+    {% endif %}
     <div class="container text-center position-relative">
         <h1>{{ trick.name }}</h1>
     </div>
-    <a href="#" class="scroll-down"><span class="iconify" data-icon="ant-design:arrow-down-outlined" data-width="30" data-height="30"></span></a>
 </section>
     <section class="pt-5 pb-5">
         <div class="container">
@@ -42,7 +51,7 @@
                     </div>
 
                     <div class="col-lg-6 col-md-12">
-                    <div id="carouselVideosControls2" class="col-lg-6 col-md-12 carousel carousel-video slide" data-ride="carousel">
+                    <div id="carouselVideosControls2" class="carousel carousel-video slide" data-ride="carousel">
                         <div class="carousel-inner">
                             {% for media in trick.medias %}
                             {% if media.type == 1 %}
@@ -77,43 +86,80 @@
         </div>
     </section>
 
-    <!-- Comment section -->
-<div id="comment" class="container mb-5 mt-5">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="text-center mb-4">Commentaires</h3>
-
-                {% if app.user %}
-                <form method="POST">
-					<div class="row">
-                        <div class="media col-12 d-flex justify-content-center text-center">
-							<div><img class="rounded-circle mb-2" src="./public/img/user.jpg" width="40">
-						</div>
-							<div class="form-group mx-auto">
-								<textarea rows="2" cols="50" name="content" class="form-control register-form mx-auto shadow-none textarea"></textarea>
-							</div>
-								<input type="hidden" name="id" value="{{ trick.id }}">
-							</div>
-						<button type="submit" id="register-btn" class="btn btn-block btn-comment">Publier</button>
-					</div>
-				</form>
-                {% else %}
-                <p>Vous devez vous connecter pour pouvoir commenter.</p>
-                {% endif %}
-
-                <div class="row">
-                    <div class="col-md-12">
+<!-- Comments -->   
+<div class="container">
+    <div class="col-md-12 pl-0 pr-0">
+        <div class="comments">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-center mb-4">Commentaires</h3>
+        
+                    {% if app.user %}
+                    {{ form_start(commentForm) }}
                         <div class="row">
-                            {% for comment in trick.comments %}
-                            <div class="col-8 d-flex">
-                                <h5>{{ comment.user }}</h5> <span>&nbsp;- {{ comment.date | date('d/m/Y à h:i') }}</span>
+                            <div class="form-group mx-auto">
+                                {{ form_widget(commentForm.content, {'attr': {'placeholder': 'Votre commentaire'}}) }}
                             </div>
-                        </div>{{ comment.content }} 
-                    </div>
-					{% endfor %}
+                            <div>
+                                <input type="hidden" name="id_trick" value="{{ trick.name }}">
+                                <input type="hidden" name="id_" value="{{ trick.name }}">
+                            </div>
+                            <button type="submit" id="comment-btn" class="btn btn-block btn-comment" value="Publier"/></button>
+                        </div>
+                    {{ form_end(commentForm) }}
+                    {% else %}
+                    <p class="text-center">Vous devez vous connecter pour pouvoir commenter.</p>
+                    {% endif %}
                 </div>
+            </div>  
+            <div class="entry-comments">
+            <h6 class="mb-30">{{ trick.comments | length }} commentaires</h6>    
+
+                <ul class="entry-comments-list list-unstyled">
+                    {% for comment in trick.comments %}
+                    <li>
+                    <div class="entry-comments-item">
+                        <img src="https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F05.2F04.2F7243db50-2e3e-46c9-a002-03fdd6885b8e.2Ejpeg/1200x630/cr/wqkgR2V0dHkgSW1hZ2VzIC8gR0VP/qui-est-le-quokka-surnomme-lanimal-le-plus-heureux-du-monde.jpg" class="entry-comments-avatar" alt="Avatar">
+                            <div class="entry-comments-body">
+                                <span class="entry-comments-author">{{ comment.user }}</span>
+                                <span class="comment-date">{{ comment.date | date('d/m/Y à h:i') }}</span>
+                                <p class="comment-content text-justify">{{ comment.content }}</p>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                
             </div>
         </div>
+    </div>
+    {% if trick.comments|length > 6 %}
+    <div class="text-center">
+        <a href="#" id="loadMoreComment" class="btn btn-blue mt-5">Voir plus</a>
+    </div>
+    {% endif %}
 </div>
-<!-- End Comment section -->
+<!-- End Comments -->   
+
+<!-- Modal Suppression Trick -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Êtes-vous sûr de vouloir supprimer ce trick ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary">Confirmer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal Suppression Trick -->
 {% endblock %}

@@ -9,6 +9,7 @@
 
     <div class="login-container" id="container">
 		<div class="form-container sign-in-container">
+			<div class="login-form">
 			{{ form_start(registrationForm) }}
 			<h1>Créer un compte</h1>
 			<div class="social-container">
@@ -29,13 +30,15 @@
 			{{ form_widget(registrationForm._token) }}
 			<button type="submit">S'inscrire</button>
 			{{ form_end(registrationForm, {'render_rest': false}) }}
+			<a href="{{ path('app_login') }}" class="d-block d-sm-none mt-4">Vous avez déjà un compte ? Connectez-vous</a>
+		</div>
 		</div>
 		<div class="overlay-container">
 			<div class="overlay">
 				<div class="overlay-panel overlay-right">
 					<h1>Bon retour!</h1>
 					<p>Vous avez déjà un compte ? Connectez-vous pour accéder à votre espace personnel</p>
-					<a href="/connexion">
+					<a href="{{ path('app_login')}}">
 						<button class="ghost" id="signUp">Se connecter</button>
 					</a>
 				</div>

@@ -20,34 +20,33 @@
 		<div class="login-container" id="container">
 			<div class="form-container sign-in-container">
 				<div class="login-form">
-				<h1>Se connecter</h1>
-				<div class="social-container">
-					<a href="#" class="social">
-						<i class="fab fa-facebook-f"></i>
-					</a>
-					<a href="#" class="social">
-						<i class="fab fa-google-plus-g"></i>
-					</a>
-					<a href="#" class="social">
-						<i class="fab fa-linkedin-in"></i>
-					</a>
+					<h1>Se connecter</h1>
+					<div class="social-container">
+						<a href="#" class="social">
+							<i class="fab fa-facebook-f"></i>
+						</a>
+						<a href="#" class="social">
+							<i class="fab fa-google-plus-g"></i>
+						</a>
+						<a href="#" class="social">
+							<i class="fab fa-linkedin-in"></i>
+						</a>
+					</div>
+					<span>ou utilisez votre compte</span>
+					<input type="text" value="{{ last_username }}" name="_username" class="form-control" autocomplete="username" required autofocus placeholder="Pseudo">
+					<input type="password" name="_password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="Mot de passe">
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+					<a href="{{ path('app_forgot_password_request') }}"> Mot de passe oublié?</a>
+					<button type="submit">Connexion</button>
+					<a href="{{ path('app_register') }}" class="d-block d-sm-none mt-4">Vous n'avez pas encore de compte ? Inscrivez-vous</a>
 				</div>
-				<span>ou utilisez votre compte</span>
-				<input type="text" value="{{ last_username }}" name="_username" class="form-control" autocomplete="username" required autofocus placeholder="Pseudo">
-				<input type="password" name="_password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="Mot de passe">
-				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-				<a href="{{ path('app_forgot_password_request') }}"> Mot de passe oublié?</a>
-				<button type="submit">Connexion</button>
-			</div>
 			</div>
 			<div class="overlay-container">
 				<div class="overlay">
 					<div class="overlay-panel overlay-right">
 						<h1>Bienvenue !</h1>
 						<p>Vous n'avez pas encore de compte ? Créez-en un pour rejoindre la communauté Snowtricks</p>
-						<a href="/inscription">
-							<button class="ghost" id="signUp">S'inscrire</button>
-						</a>
+						<a href="{{ path('app_register')}}" class="ghost" id="signUp">S'inscrire</a>
 					</div>
 				</div>
 			</div>

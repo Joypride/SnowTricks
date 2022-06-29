@@ -18,11 +18,12 @@
             <div class="row">
               <div class= "col-md-6">
                 <div class="form-group">
-                    <input type="file" class="bug_cls" name="image" required="required" placeholder="Upload image"/>
+                    <input type="file" class="bug_cls" name="image" placeholder="Upload image"/>
                 </div>
               </div>
               <div class= "col-md-6">
                 <div class="form-group">
+                  {{ form_widget(form.category) }}
                   <select type="text" class="form-control" name="category" required="required">
                     <option value="">Catégorie</option>
                     {% for c in category %}
@@ -36,10 +37,11 @@
               <label class="label-form">Description</label>
               {{ form_widget(form.description) }}
             </div>
+            {{ form_widget(form._token) }}
             <div class="form-group">
                <input type="submit" value="Ajouter" class="submit-form mt-4" />
             </div>
-          </form>
+          {{ form_end(form, {'render_rest': false}) }}
         </div>
       </div>
     </div>

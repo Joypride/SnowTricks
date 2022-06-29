@@ -7,6 +7,7 @@ use App\Entity\Comment;
 use App\Entity\Group;
 use App\Form\CommentType;
 use App\Form\CreateTrickType;
+// use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,15 +23,15 @@ class TrickController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
 
-        $category = new Group();
         $trick = new Trick();
         $form = $this->createForm(CreateTrickType::class, $trick);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-
             $user = $this->getUser();
             $trick->setUser($user);
+
+            $trick->setCategory();
 
             $entityManager->persist($trick);
             $entityManager->flush();
@@ -42,7 +43,7 @@ class TrickController extends AbstractController
 
         return $this->render('create_trick.html.twig', [
             'form'=> $form->createView(),
-            'category' => $category->getName()
+            'category' => $doctrine->getRepository(Group::class)->findAll()
         ]);
     }
     
@@ -54,23 +55,29 @@ class TrickController extends AbstractController
         $entityManager = $doctrine->getManager();
 
         $comment = new Comment();
+
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
-                $comment->setTrick($id);
-                $comment->setContent();
-                $comment->setDate(new \DateTime('now'));
-                $comment->setUser($user);
+        // $trick = $this->trickRepository->findOneBySlug($request->attributes->get('slug'));
+        $trick = $doctrine->getManager()->getRepository(Trick::class)->find($id);
 
-                $entityManager->persist($comment);
-                $entityManager->flush();
+        if($form->isSubmitted() && $form->isValid()){
+
+            // $comment->setContent($form['content']->getData());
+            $comment->setDate(new \DateTime('now'));
+            $comment->setTrick($trick);
+            $comment->setUser($this->getUser());
+
+            $entityManager->persist($comment);
+            $entityManager->flush();
 
             $this->addFlash('success','Comment send');
         }
 
         return $this->render('trick_detail.html.twig', [
-            'trick' => $doctrine->getRepository(Trick::class)->find($id)
+            'trick' => $doctrine->getRepository(Trick::class)->find($id),
+            'commentForm' => $form->createView(),
         ]);
     }
 
