@@ -65,3 +65,43 @@ $(document).ready(function(){
      window.addEventListener('load', toggleBacktotop)
      onscroll(document, toggleBacktotop)
    }
+
+
+   /**
+    * Add lines in create trick form
+    */
+
+     const addTagLink = document.createElement('a')
+      addTagLink.classList.add('add_tag_list')
+      addTagLink.href='#'
+      addTagLink.innerText='Ajouter une image ou une vidéo'
+      addTagLink.dataset.collectionHolderClass='tags'
+      
+      const newLinkLi = document.createElement('li').append(addTagLink)
+      
+      const collectionHolder = document.querySelector('ul.tags')
+      collectionHolder.appendChild(addTagLink)
+      
+      const addFormToCollection = (e) => {
+        const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+      
+            const item = document.createElement('li');
+      
+            item.innerHTML = collectionHolder
+              .dataset
+              .prototype
+              .replace(
+                /__name__/g,
+                collectionHolder.dataset.index
+              );
+      
+            collectionHolder.appendChild(item);
+      
+            collectionHolder.dataset.index++;
+      }
+
+      addTagLink.addEventListener("click", function(e) {
+        e.preventDefault();
+      })
+      
+      addTagLink.addEventListener("click", addFormToCollection)

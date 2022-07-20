@@ -96,6 +96,7 @@ class AppFixtures extends Fixture
 
                     $trickMedia->setUrl('https://images.unsplash.com/photo-1478700485868-972b69dc3fc4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80');
                     $trickMedia->setType(0);
+                    $trickMedia->setMain(1);
                     
 
                     $trick = new Trick();

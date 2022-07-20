@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\TrickRepository;
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,6 +21,12 @@ class Trick
     #[ORM\Column(type: 'text')]
     private $description;
 
+    #[ORM\Column(type: 'datetime', options: ["default" => "CURRENT_TIMESTAMP"])]
+    private $created_at;
+
+    #[ORM\Column(type: 'datetime', options: ["default" => "CURRENT_TIMESTAMP"])]
+    private $updated_at;
+
     #[ORM\ManyToOne(targetEntity: Group::class, inversedBy: 'tricks')]
     #[ORM\JoinColumn(nullable: false)]
     private $category;
@@ -33,13 +38,15 @@ class Trick
     #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Comment::class, orphanRemoval: true)]
     private $comments;
 
-    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Media::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Media::class, orphanRemoval: true, cascade: ['persist'])]
     private $medias;
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->medias = new ArrayCollection();
+        $this->created_at = new \DateTime();
+        $this->updated_at = new \DateTime();
     }
 
     public function getId(): ?int
@@ -67,6 +74,30 @@ class Trick
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTime
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTime $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTime
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTime $updated_at): self
+    {
+        $this->updated_at = $updated_at;
 
         return $this;
     }
@@ -99,6 +130,16 @@ class Trick
     {
         return $this->name;
     }
+
+    // public function addMedia(Media $media): void
+    // {
+    //     $this->medias->add($media);
+    // }
+
+    // public function removeMedia(Media $media): void
+    // {
+    //     // ...
+    // }
 
     /**
      * @return Collection<int, Comment>

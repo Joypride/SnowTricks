@@ -38,6 +38,15 @@ a:hover {
     color: #2A3336;
 }
 
+ul, li {
+    list-style: none;
+}
+
+.flash-message {
+    width: fit-content;
+    margin: auto;
+}
+
 /* HEADER */
 
 .navbar {
@@ -405,6 +414,48 @@ button.ghost {
     color: #999999;
 }
 
+/* TRICK FORM */
+
+.wrapp {
+	border-radius: 5px;
+	max-width:800px;
+	width:100%;
+	margin: 5% auto;
+	overflow: hidden;
+}
+  
+textarea {
+	margin: 0;
+	height: 200px !important;
+}
+
+.headline-text {
+	height: 100px !important; 
+}
+  
+.bug_cls {
+	display: block;
+	width: 100%;
+	padding: 6px 12px;
+	font-size: 14px;
+	border: 1px solid #ccc;
+}
+
+.submit-form {
+	width: 30%;
+    border: none;
+    padding: 10px 10px;
+    margin: auto;
+    display: block;
+}
+
+.label-form {
+	color: #03989E;
+}
+
+textarea.form-control, .contentform input, .contentform select {
+	border-radius: 25px;
+}
 
 /* FOOTER */
 

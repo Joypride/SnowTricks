@@ -4,15 +4,23 @@
 
 {% block content %}
 <!-- Hero Section  -->
-{% for media in trick.medias %}
+{% set exist = false %}
+    {% for media in trick.medias %}
         {% if media.main %}
-        <section id="hero-detail" class="d-flex align-items-center img-fluid" style="background-image: url('{{ media.url }}')">
+            {% set exist = true %}
+                <section id="hero-detail" class="d-flex align-items-center img-fluid" style="background-image: url('{{ media.url }}')">
         {% endif %}
     {% endfor %}
+    {%  if exist == false and trick.medias is not empty %}
+        <section id="hero-detail" class="d-flex align-items-center img-fluid" style="background-image: url('https://images.unsplash.com/photo-1478700485868-972b69dc3fc4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80')">
+    {% endif %}
+    {% if (trick.medias is empty) %}
+        <section id="hero-detail" class="d-flex align-items-center img-fluid" style="background-image: url('https://images.unsplash.com/photo-1478700485868-972b69dc3fc4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80')">
+    {% endif %}
     {% if app.user %}
     <div class="wrap-icons">
         <a href="#"><i class="fas fa-pencil-alt fa-1x"></i></a>
-        <a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-trash-alt fa-1x ml-3"></i></a>
+        <a href="#delete-{{ trick.id }}" data-toggle="modal" data-target="#modal{{ trick.id }}"><i class="fas fa-trash-alt fa-1x ml-3"></i></a>
     </div>
     {% endif %}
     <div class="container text-center position-relative">
@@ -29,7 +37,7 @@
                         <div class="carousel-inner">
                             {% for media in trick.medias %}
                             {% if media.type == 0 %}
-                                {% if loop.index0 %}
+                                {% if media.main == 1 %}
                                 <div class="carousel-item active">
                                 {% else %}
                                 <div class="carousel-item">
@@ -60,7 +68,7 @@
                                 {% else %}
                                 <div class="carousel-item">
                                 {% endif %}
-                                <iframe width="478" height="315" src="{{ media.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="478" height="315" class="img-fluid" src="{{ media.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </div>
                             {% endif %}
                             {% endfor %}
@@ -81,8 +89,12 @@
     </section>
     <section>
         <div class="container">
-            <p class="text-center">{{ trick.description }}</p>
-            <button class="btn btn-custom">Catégorie</button><span>Catégorie: {{ trick.category }}</span>
+            <div class="text-center">
+                <p>Catégorie: {{ trick.category }}</p>
+            </div>
+            <div>
+                <p class="text-center">{{ trick.description }}</p>
+            </div>
         </div>
     </section>
 
@@ -96,7 +108,7 @@
         
                     {% if app.user %}
                     {{ form_start(commentForm) }}
-                        <div class="row">
+                        <div class="row flex-column">
                             <div class="form-group mx-auto">
                                 {{ form_widget(commentForm.content, {'attr': {'placeholder': 'Votre commentaire'}}) }}
                             </div>
@@ -104,7 +116,7 @@
                                 <input type="hidden" name="id_trick" value="{{ trick.name }}">
                                 <input type="hidden" name="id_" value="{{ trick.name }}">
                             </div>
-                            <button type="submit" id="comment-btn" class="btn btn-block btn-comment" value="Publier"/></button>
+                            <button type="submit" id="comment-btn" class="btn btn-block btn-comment">Publier</button>
                         </div>
                     {{ form_end(commentForm) }}
                     {% else %}
@@ -142,7 +154,7 @@
 <!-- End Comments -->   
 
 <!-- Modal Suppression Trick -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal{{ trick.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -156,7 +168,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-          <button type="button" class="btn btn-primary">Confirmer</button>
+          <button type="button" class="btn btn-primary"><a href="{{ path('delete_trick', {id:trick.id}) }}">Confirmer</a></button>
         </div>
       </div>
     </div>

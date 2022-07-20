@@ -5,9 +5,9 @@ namespace App\Controller;
 use App\Entity\Trick;
 use App\Entity\Comment;
 use App\Entity\Group;
+use App\Entity\Media;
 use App\Form\CommentType;
 use App\Form\CreateTrickType;
-// use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,25 +24,33 @@ class TrickController extends AbstractController
         $entityManager = $doctrine->getManager();
 
         $trick = new Trick();
+        $trick = $entityManager->getRepository(Trick::class)->find(143);
         $form = $this->createForm(CreateTrickType::class, $trick);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $user = $this->getUser();
-            $trick->setUser($user);
+            
 
-            $trick->setCategory();
+            $trick->setUser($this->getUser());
+            foreach ($trick->getMedias() as $media) {
+                $media->setTrick($trick);
+            }
+            // $data = $form->getData();
+            // $media->setUrl($form->getData('name'));
+            // $media->setType('media');
+            // $media->setMain('media');
+
 
             $entityManager->persist($trick);
             $entityManager->flush();
 
             $this->addFlash('success', 'Trick created');
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('create_trick.html.twig', [
-            'form'=> $form->createView(),
+            'createForm'=> $form->createView(),
             'category' => $doctrine->getRepository(Group::class)->findAll()
         ]);
     }
@@ -59,12 +67,10 @@ class TrickController extends AbstractController
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
-        // $trick = $this->trickRepository->findOneBySlug($request->attributes->get('slug'));
         $trick = $doctrine->getManager()->getRepository(Trick::class)->find($id);
 
         if($form->isSubmitted() && $form->isValid()){
 
-            // $comment->setContent($form['content']->getData());
             $comment->setDate(new \DateTime('now'));
             $comment->setTrick($trick);
             $comment->setUser($this->getUser());
@@ -82,18 +88,25 @@ class TrickController extends AbstractController
     }
 
     /**
-    * @Route("/modifier", name="modify_trick")
+    * @Route("/trick/edit/{id}", name="edit_trick")
     */
-    public function modifyTrick() : Response
+    public function editTrick() : Response
     {
         return $this->render('index.html.twig');
     }
 
     /**
-    * @Route("/supprimer", name="delete_trick")
+    * @Route("/trick/delete/{id}", name="delete_trick", methods={"DELETE", "GET"})
     */
-    public function deleteTrick() : Response
+    public function deleteTrick(int $id, Trick $trick, ManagerRegistry $doctrine)
     {
-        return $this->render('index.html.twig');
+        $doctrine->getManager()->getRepository(Trick::class)->find($id);
+
+        $doctrine->getManager()->remove($trick);
+        $doctrine->getManager()->flush();
+
+        $this->addFlash('success', $trick->getName() . " a été supprimée avec succès !");
+
+        return $this->redirectToRoute('home');
     }
 }
