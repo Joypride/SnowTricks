@@ -413,6 +413,10 @@ button.ghost {
     font-size: 15px;
     color: #999999;
 }
+.trick-medias {
+    width: 100%;
+    height: 18.75rem;
+}
 
 /* TRICK FORM */
 
@@ -455,6 +459,27 @@ textarea {
 
 textarea.form-control, .contentform input, .contentform select {
 	border-radius: 25px;
+}
+
+.media-icon {
+    background: #9BC9D4;
+    color: #fff;
+    border-radius: 25px;
+    width: 30px;
+    height: 30px;
+    padding: 9px;
+}
+
+ul.tags {
+    padding: 0;
+}
+
+.tags label {
+    margin-right: 10px;
+}
+
+.input-medias input[type='checkbox'] {
+    width: 20px!important;
 }
 
 /* FOOTER */

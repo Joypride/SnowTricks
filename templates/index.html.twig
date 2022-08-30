@@ -40,7 +40,7 @@
                     <div class="d-flex">
                         <h5 class="card-title">{{ trick.name }}</h5>
                         {% if app.user %}
-                        <a href="#"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="{{ path('edit_trick', {id:trick.id}) }}"><i class="fas fa-pencil-alt"></i></a>
                         <a href="#delete-{{ trick.id }}" data-toggle="modal" data-target="#modal{{ trick.id }}"><i class="fas fa-trash-alt"></i></a>
 
                         <!-- Modal Suppression Trick -->

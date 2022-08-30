@@ -75,6 +75,7 @@ $(document).ready(function(){
       addTagLink.classList.add('add_tag_list')
       addTagLink.href='#'
       addTagLink.innerText='Ajouter une image ou une vidéo'
+      addTagLink.innerHTML='<i class="media-icon fa fa-plus" aria-hidden="true"></i>'
       addTagLink.dataset.collectionHolderClass='tags'
       
       const newLinkLi = document.createElement('li').append(addTagLink)
@@ -105,3 +106,4 @@ $(document).ready(function(){
       })
       
       addTagLink.addEventListener("click", addFormToCollection)
+    

@@ -24,7 +24,6 @@ class TrickController extends AbstractController
         $entityManager = $doctrine->getManager();
 
         $trick = new Trick();
-        $trick = $entityManager->getRepository(Trick::class)->find(143);
         $form = $this->createForm(CreateTrickType::class, $trick);
         $form->handleRequest($request);
 
@@ -90,9 +89,40 @@ class TrickController extends AbstractController
     /**
     * @Route("/trick/edit/{id}", name="edit_trick")
     */
-    public function editTrick() : Response
+    public function editTrick(ManagerRegistry $doctrine, Request $request, int $id)
     {
-        return $this->render('index.html.twig');
+        $entityManager = $doctrine->getManager();
+
+        $trick = new Trick();
+        $trick = $entityManager->getRepository(Trick::class)->find($id);
+        $form = $this->createForm(CreateTrickType::class, $trick);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            
+
+            $trick->setUser($this->getUser());
+            foreach ($trick->getMedias() as $media) {
+                $media->setTrick($trick);
+            }
+            // $data = $form->getData();
+            // $media->setUrl($form->getData('name'));
+            // $media->setType('media');
+            // $media->setMain('media');
+
+
+            $entityManager->persist($trick);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Trick modifié !');
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('edit_trick.html.twig', [
+            'createForm'=> $form->createView(),
+            'category' => $doctrine->getRepository(Group::class)->findAll()
+        ]);
     }
 
     /**

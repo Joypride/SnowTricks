@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="container">
-  <h1 class="text-center mt-5">Modifier le trick {{ trick.name }}</h1>
+  <h1 class="text-center mt-5">Modifier le trick</h1>
   <div class="contentform">
       
       <div class="container">
@@ -29,14 +29,28 @@
                 {{ form_widget(createForm.description, {'attr': {'class': 'form-control'}}) }}
               </div>
 
+              <div class="input-medias">
+                <label class="label-form">Médias</label>
+                {% for media in createForm.medias %}
+                <div class="w-50 mb-4">
+                  <label class="">Url</label>{{ form_widget(media.url, {'attr': {'class': 'form-control'}}) }}
+                  <label class="">Type</label>{{ form_widget(media.type, {'attr': {'class': 'form-control'}}) }}
+                  <label class="">Main</label>{{ form_widget(media.main, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {% endfor %}
+              </div>
+
+              <div class="form-group">
+                <label class="label-form">Ajouter un média</label>
               <ul class="tags"
                 data-index="{{ createForm.medias|length > 0 ? createForm.medias|last.vars.name + 1 : 0 }}"
                 data-prototype="{{ form_widget(createForm.medias.vars.prototype)|e('html_attr') }}"></ul>
               </ul>
+              </div>
 
               {{ form_widget(createForm._token) }}
               <div class="form-group">
-                <button type="submit" class="submit-form mt-4">Ajouter</button>
+                <button type="submit" class="submit-form mt-4">Modifier</button>
               </div>
             {{ form_end(createForm, {'render_rest': false}) }}
           </div>
