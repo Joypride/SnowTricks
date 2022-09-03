@@ -3,10 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\Comment;
+use App\Repository\Trick;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @method Comment|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,6 +21,20 @@ class CommentRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Comment::class);
+    }
+
+    public function findForPagination($trick = null) : Query
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->orderBy('c.date', 'DESC');
+
+        if($trick) {
+            $qb->leftJoin('c.trick', 't')
+            ->where($qb->expr()->eq('t.id', ':trickId'))
+            ->setParameter('trickId', $trick->getId());
+        }
+
+        return $qb->getQuery();
     }
 
     /**

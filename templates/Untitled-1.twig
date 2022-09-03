@@ -1,8 +1,0 @@
-<div class="form-group">
-    <label class="label-form">Médias</label>
-    {% for media in createForm.medias %}
-    <td></td>{{ form_row(media.url, {'attr': {'class': 'form-control'}}) }}
-    <td></td>{{ form_row(media.type, {'attr': {'class': 'form-control'}}) }} 
-    <td></td>{{ form_row(media.main, {'attr': {'class': 'form-control'}}) }} 
-    {% endfor %}
-  </div>

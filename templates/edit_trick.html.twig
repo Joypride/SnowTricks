@@ -4,12 +4,13 @@
 
 {% block content %}
 <div class="container">
-  <h1 class="text-center mt-5">Modifier le trick</h1>
+  <h1 class="text-center mt-5">Modifier le trick</h1>         
   <div class="contentform">
       
       <div class="container">
         <div class="row">
           <div class="col-md-12">
+            
               {{ form_start(createForm, {'attr': {'class': 'wrapp'}}) }}
               <div class="form-group">
                 <label class="label-form">Nom</label>
@@ -56,7 +57,30 @@
           </div>
         </div>
       </div>
+      <div class="btn btn-red"><a href="#delete-{{ trick.id }}" data-toggle="modal" data-target="#modal{{ trick.id }}" class="btn">Supprimer ce trick</a></div>
     
   </div>
 </div>
+
+<!-- Modal Suppression Trick -->
+<div class="modal fade" id="modal{{ trick.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sûr de vouloir supprimer ce trick ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-primary"><a href="{{ path('delete_trick', {id:trick.id}) }}">Confirmer</a></button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal Suppression Trick -->
 {% endblock %}

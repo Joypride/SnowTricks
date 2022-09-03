@@ -30,67 +30,70 @@
     <section class="pt-5 pb-5">
         <div class="container">
 
-                <div class="row d-flex justify-content-center">
+                <div id="trickMedia" class="row">
 
                     <div class="col-lg-6 col-md-12">
-                    <div id="carouselPhotosControls" class="carousel-photo carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            {% for media in trick.medias %}
-                            {% if media.type == 0 %}
-                                {% if media.main == 1 %}
-                                <div class="carousel-item active">
-                                {% else %}
-                                <div class="carousel-item">
-                                {% endif %}
-                                    <img class="trick-medias" src="{{ media.url }}" alt="Snowboard trick">
-                                </div>
-                            {% endif %}
-                            {% endfor %}
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselPhotosControls" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselPhotosControls" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-12">
-                    <div id="carouselVideosControls2" class="carousel carousel-video slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            {% for media in trick.medias %}
-                                {% if media.type == 1 %}
-                                    {% if loop.index0 %}
+                        <div id="carouselPhotosControls" class="carousel-photo carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for media in trick.medias %}
+                                {% if media.type == 0 %}
+                                    {% if media.main == 1 %}
                                     <div class="carousel-item active">
                                     {% else %}
                                     <div class="carousel-item">
                                     {% endif %}
-                                    <iframe class="trick-medias" src="{{ media.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <img class="trick-medias img-media" src="{{ media.url }}" alt="Snowboard trick">
                                     </div>
                                 {% endif %}
-                            {% endfor %}
+                                {% endfor %}
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselPhotosControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselPhotosControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselVideosControls2" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselVideosControls2" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                        </a>
                     </div>
+
+                    <div class="col-lg-6 col-md-12">
+                        <div id="carouselVideosControls2" class="carousel carousel-video slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for media in trick.medias %}
+                                    {% if media.type == 1 %}
+                                        {% if loop.index0 %}
+                                        <div class="carousel-item active">
+                                        {% else %}
+                                        <div class="carousel-item">
+                                        {% endif %}
+                                        <iframe class="trick-medias" src="{{ media.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselVideosControls2" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselVideosControls2" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                            </a>
+                        </div>
                     </div>
                     
                 </div>
+        </div>
+        <div class="text-center" id="seeMedia">
+            <button class="btn mt-3">Voir les médias</button>
         </div>
     </section>
     <section>
         <div class="container">
             <div class="text-center">
-                <p>Catégorie: {{ trick.category }}</p>
+                <p>Catégorie: <span class="detail-category">{{ trick.category }}</span></p>
             </div>
             <div>
                 <p class="text-center">{{ trick.description }}</p>
@@ -116,7 +119,7 @@
                                 <input type="hidden" name="id_trick" value="{{ trick.name }}">
                                 <input type="hidden" name="id_" value="{{ trick.name }}">
                             </div>
-                            <button type="submit" id="comment-btn" class="btn btn-block btn-comment">Publier</button>
+                            <button type="submit" id="comment-btn" class="btn btn-block btn-comment mb-4">Publier</button>
                         </div>
                     {{ form_end(commentForm) }}
                     {% else %}
@@ -128,28 +131,29 @@
             <h6 class="mb-30">{{ trick.comments | length }} commentaires</h6>    
 
                 <ul class="entry-comments-list list-unstyled">
-                    {% for comment in trick.comments %}
+                    {% for comment in comments %}
                     <li>
                     <div class="entry-comments-item">
                         <img src="https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F05.2F04.2F7243db50-2e3e-46c9-a002-03fdd6885b8e.2Ejpeg/1200x630/cr/wqkgR2V0dHkgSW1hZ2VzIC8gR0VP/qui-est-le-quokka-surnomme-lanimal-le-plus-heureux-du-monde.jpg" class="entry-comments-avatar" alt="Avatar">
                             <div class="entry-comments-body">
                                 <span class="entry-comments-author">{{ comment.user }}</span>
                                 <span class="comment-date">{{ comment.date | date('d/m/Y à h:i') }}</span>
-                                <p class="comment-content text-justify">{{ comment.content }}</p>
+                                <p class="comment-content">{{ comment.content }}</p>
                             </div>
                         </div>
                     </li>
                     {% endfor %}
                 </ul>
-                
+                <div class="container">
+                    <div class="row">
+                        <div class="d-flex mx-auto align-items-center justify-content-center">
+                            {{ knp_pagination_render(comments) }}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    {% if trick.comments|length > 6 %}
-    <div class="text-center">
-        <a href="#" id="loadMoreComment" class="btn btn-blue mt-5">Voir plus</a>
-    </div>
-    {% endif %}
 </div>
 <!-- End Comments -->   
 

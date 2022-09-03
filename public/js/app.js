@@ -27,28 +27,25 @@ $(document).ready(function(){
   
 })
 
-/**
-  * Load More Comments
-  */
-
- $(document).ready(function(){
-  $(".comment-content").slice(0, 6).show();
-  $("#loadMoreComment").on("click", function(e){
-    e.preventDefault();
-    $(".comment-content:hidden").slice(0, 6).slideDown();
-    if($(".comment-content:hidden").length == 0) {
-      $("#loadMoreComment").hide();
-    }
-  });
-  
-})
-
   /**
    * Easy on scroll event listener 
    */
    const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)
   }
+
+
+  /**
+   * Display medias on mobile 
+   */
+
+  let medias = document.getElementById('trickMedia');
+  let btnMedia = document.getElementById('seeMedia');
+
+  btnMedia.addEventListener('click', function() {
+    medias.style.display = 'block';
+    btnMedia.style.display = 'none';
+  })
 
   /**
    * Back to top button

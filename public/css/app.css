@@ -333,7 +333,6 @@ button.ghost {
     }
 }
 
-
 /* TRICKS */
 
 .btn-custom {
@@ -348,6 +347,19 @@ button.ghost {
     background-color: #03989E;
     color: #fff;
 }
+.btn-red {
+    background-color: #FE1B00;
+    border-radius: 25px;
+    display: block;
+    width: 25%;
+    margin: auto;
+}
+.btn-red a {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+}
 .card-title {
     margin-bottom: 0;
 }
@@ -357,6 +369,12 @@ button.ghost {
 }
 #trick-content {
     display: none;
+}
+
+@media screen and (max-width:767px) {
+    .btn-red {
+        width: 100%;
+    }
 }
 
 /* TRICKS DETAILS */
@@ -413,10 +431,39 @@ button.ghost {
     font-size: 15px;
     color: #999999;
 }
+#comment_content {
+    width: 100%;
+}
 .trick-medias {
     width: 100%;
     height: 18.75rem;
 }
+.detail-category {
+    font-size: 14px;
+    background: gray;
+    padding: 5px;
+    color: #fff;
+    border-radius: 5px;
+}
+#seeMedia {
+	display: none;
+}
+
+@media screen and (max-width:767px) {
+    .btn-comment {
+        width: 35%;
+    }
+    .img-media {
+        margin-bottom: 10px;
+    }
+    #trickMedia {
+		display: none;
+	}
+    #seeMedia {
+        display: block;
+    }
+}
+
 
 /* TRICK FORM */
 

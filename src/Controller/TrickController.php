@@ -5,9 +5,9 @@ namespace App\Controller;
 use App\Entity\Trick;
 use App\Entity\Comment;
 use App\Entity\Group;
-use App\Entity\Media;
 use App\Form\CommentType;
 use App\Form\CreateTrickType;
+use App\Service\CommentService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +24,7 @@ class TrickController extends AbstractController
         $entityManager = $doctrine->getManager();
 
         $trick = new Trick();
-        $form = $this->createForm(CreateTrickType::class, $trick);
+        $form = $this->createForm(CreateTrickType::class, $trick, ["validation_groups" => ['Default', 'name']]);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -34,11 +34,6 @@ class TrickController extends AbstractController
             foreach ($trick->getMedias() as $media) {
                 $media->setTrick($trick);
             }
-            // $data = $form->getData();
-            // $media->setUrl($form->getData('name'));
-            // $media->setType('media');
-            // $media->setMain('media');
-
 
             $entityManager->persist($trick);
             $entityManager->flush();
@@ -47,6 +42,7 @@ class TrickController extends AbstractController
 
             return $this->redirectToRoute('home');
         }
+
 
         return $this->render('create_trick.html.twig', [
             'createForm'=> $form->createView(),
@@ -57,7 +53,7 @@ class TrickController extends AbstractController
     /**
     * @Route("/trick/detail/{id}-{slug}", name="trick_detail")
     */
-    public function trickDetail(int $id, Request $request, ManagerRegistry $doctrine) : Response
+    public function trickDetail(int $id, Request $request, ManagerRegistry $doctrine, CommentService $commentService) : Response
     {
         $entityManager = $doctrine->getManager();
 
@@ -82,6 +78,7 @@ class TrickController extends AbstractController
 
         return $this->render('trick_detail.html.twig', [
             'trick' => $doctrine->getRepository(Trick::class)->find($id),
+            'comments' => $commentService->getPaginatedComments($trick),
             'commentForm' => $form->createView(),
         ]);
     }
@@ -105,11 +102,6 @@ class TrickController extends AbstractController
             foreach ($trick->getMedias() as $media) {
                 $media->setTrick($trick);
             }
-            // $data = $form->getData();
-            // $media->setUrl($form->getData('name'));
-            // $media->setType('media');
-            // $media->setMain('media');
-
 
             $entityManager->persist($trick);
             $entityManager->flush();
@@ -120,6 +112,7 @@ class TrickController extends AbstractController
         }
 
         return $this->render('edit_trick.html.twig', [
+            'trick' => $doctrine->getRepository(Trick::class)->find($id),
             'createForm'=> $form->createView(),
             'category' => $doctrine->getRepository(Group::class)->findAll()
         ]);
