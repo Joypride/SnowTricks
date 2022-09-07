@@ -351,8 +351,9 @@ button.ghost {
     background-color: #FE1B00;
     border-radius: 25px;
     display: block;
-    width: 25%;
+    width: fit-content;
     margin: auto;
+    padding: 0;
 }
 .btn-red a {
     color: #fff;

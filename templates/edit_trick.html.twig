@@ -14,10 +14,10 @@
               {{ form_start(createForm, {'attr': {'class': 'wrapp'}}) }}
               <div class="form-group">
                 <label class="label-form">Nom</label>
-                {{ form_widget(createForm.name, {'attr': {'class': 'form-control'}}) }}
+                {{ form_row(createForm.name, {'attr': {'class': 'form-control'}}) }}
               </div>
-              <div class="row">
-               
+
+              <div class="row">   
                 <div class= "col-md-12">
                   <div class="form-group">
                 <label class="label-form">Catégorie</label>
@@ -25,6 +25,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="form-group">
                 <label class="label-form">Description</label>
                 {{ form_widget(createForm.description, {'attr': {'class': 'form-control'}}) }}
@@ -32,13 +33,26 @@
 
               <div class="input-medias">
                 <label class="label-form">Médias</label>
-                {% for media in createForm.medias %}
-                <div class="w-50 mb-4">
-                  <label class="">Url</label>{{ form_widget(media.url, {'attr': {'class': 'form-control'}}) }}
-                  <label class="">Type</label>{{ form_widget(media.type, {'attr': {'class': 'form-control'}}) }}
-                  <label class="">Main</label>{{ form_widget(media.main, {'attr': {'class': 'form-control'}}) }}
+                <div class="collection-item-wrapper">
+                  {% for media in createForm.medias %}
+                  <div class="row mb-4 collection-item">
+                    <div class="col-6">
+                      <label class="">Url</label>{{ form_widget(media.url, {'attr': {'class': 'form-control'}}) }}
+                      <label class="">Type</label>{{ form_widget(media.type, {'attr': {'class': 'form-control'}}) }}
+                      <label class="">Main</label>{{ form_widget(media.main, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="col-5">
+                      {% if media.type.vars.value == '0' %}
+                      <img class="img-fluid" src="{{ media.url.vars.value }}">
+                      {% else %}
+                      <iframe src="{{ media.url.vars.value }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="height: -webkit-fill-available;"></iframe>
+                      {% endif %}
+                    </div>
+                    <div class="col-1"><a href="#" class="remove-collection-item"><i class="fa fa-close"></i></a></div>
+                  </div>
+                  <hr>
+                  {% endfor %}
                 </div>
-                {% endfor %}
               </div>
 
               <div class="form-group">

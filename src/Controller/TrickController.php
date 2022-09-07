@@ -24,7 +24,7 @@ class TrickController extends AbstractController
         $entityManager = $doctrine->getManager();
 
         $trick = new Trick();
-        $form = $this->createForm(CreateTrickType::class, $trick, ["validation_groups" => ['Default', 'name']]);
+        $form = $this->createForm(CreateTrickType::class, $trick);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){

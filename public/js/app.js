@@ -42,10 +42,12 @@ $(document).ready(function(){
   let medias = document.getElementById('trickMedia');
   let btnMedia = document.getElementById('seeMedia');
 
-  btnMedia.addEventListener('click', function() {
-    medias.style.display = 'block';
-    btnMedia.style.display = 'none';
-  })
+  if (typeof btnMedia !== undefined && btnMedia) {
+    btnMedia.addEventListener('click', function() {
+      medias.style.display = 'block';
+      btnMedia.style.display = 'none';
+    })
+  }
 
   /**
    * Back to top button
@@ -104,3 +106,17 @@ $(document).ready(function(){
       
       addTagLink.addEventListener("click", addFormToCollection)
     
+
+    /**
+    * Remove line from collection
+    */
+
+    jQuery(document).ready(function() {
+      var $wrapper = $('.collection-item-wrapper');
+      $wrapper.on('click', '.remove-collection-item', function(e) {
+        e.preventDefault();
+        $(this).closest('.collection-item')
+            .fadeOut()
+            .remove();
+      })
+    })

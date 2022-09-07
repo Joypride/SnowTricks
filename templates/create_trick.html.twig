@@ -14,10 +14,9 @@
 
           <div class="col-md-12">
               {{ form_start(createForm, {'attr': {'class': 'wrapp'}}) }}
-              {{ form_errors(createForm) }}
               <div class="form-group">
                 <label class="label-form">Nom</label>
-                {{ form_widget(createForm.name, {'attr': {'class': 'form-control'}}) }}
+                {{ form_row(createForm.name, {'attr': {'class': 'form-control'}}) }}
               </div>
               <div class="row">
                
@@ -36,7 +35,7 @@
                 <label class="label-form">Médias</label>
               <ul class="tags"
                 data-index="{{ createForm.medias|length > 0 ? createForm.medias|last.vars.name + 1 : 0 }}"
-                data-prototype="{{ form_widget(createForm.medias.vars.prototype)|e('html_attr') }}"></ul>
+                data-prototype="{{ form_widget(createForm.medias.vars.prototype)|e('html_attr') }}">
               </ul>
               </div>
 
