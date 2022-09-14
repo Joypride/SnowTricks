@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Trick;
+use App\Message\Notification;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 
 class HomeController extends AbstractController
@@ -23,4 +25,3 @@ class HomeController extends AbstractController
         ]);
     }
 }
-
