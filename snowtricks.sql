@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : dim. 18 sep. 2022 à 12:06
+-- Généré le : dim. 18 sep. 2022 à 16:08
 -- Version du serveur : 5.7.33
 -- Version de PHP : 8.0.12
 
@@ -69,7 +69,8 @@ INSERT INTO `comment` (`id`, `user_id`, `trick_id`, `date`, `content`) VALUES
 (51, 667, 144, '2022-08-31 00:00:00', 'Commentaire 11'),
 (52, 667, 144, '2022-08-31 00:00:00', 'Commentaire 12'),
 (53, 667, 144, '2022-09-03 08:10:18', 'Commentaire 15'),
-(54, 667, 144, '2022-09-03 08:11:02', 'Commentaire 16');
+(54, 667, 144, '2022-09-03 08:11:02', 'Commentaire 16'),
+(55, 650, 143, '2022-09-18 12:09:23', 'Nouveau commentaire');
 
 -- --------------------------------------------------------
 
@@ -234,7 +235,7 @@ CREATE TABLE `trick` (
 --
 
 INSERT INTO `trick` (`id`, `category_id`, `name`, `description`, `user_id`, `created_at`, `updated_at`) VALUES
-(143, 86, 'Indy', 'Quibusdam omnis laboriosam consectetur asperiores similique quod. Facilis odit et voluptatum consequatur nihil. Non totam sint exercitationem voluptas possimus eos quam. Nemo incidunt animi laborum placeat sit voluptatem similique. Sunt exercitationem eius ut minima aliquid atque.', 667, '2022-06-29 13:05:45', '2022-06-29 13:05:45'),
+(143, 86, 'Indy', 'Quibusdam omnis laboriosam consectetur asperiores similique quod. Facilis odit et voluptatum consequatur nihil. Non totam sint exercitationem voluptas possimus eos quam. Nemo incidunt animi laborum placeat sit voluptatem similique. Sunt exercitationem eius ut minima aliquid atque.', 650, '2022-06-29 13:05:45', '2022-06-29 13:05:45'),
 (144, 86, 'Stalefish', 'Mollitia vel voluptatum dolorem et. Deserunt laborum sunt tempore. Quaerat adipisci sed est inventore.', 674, '2022-06-29 13:05:45', '2022-06-29 13:05:45'),
 (145, 86, 'Tail Grab', 'Omnis aut labore consectetur suscipit vel ut esse. Neque dicta laborum provident cumque nihil. Magnam illo alias exercitationem libero asperiores aperiam.', 667, '2022-06-29 13:05:45', '2022-06-29 13:05:45'),
 (146, 86, 'Japan Air', 'Illum quia autem est quis exercitationem. Molestiae ut consectetur natus eos et repellendus. Qui accusamus qui quis perferendis dolor est hic.', 667, '2022-06-29 13:05:45', '2022-06-29 13:05:45'),
@@ -354,7 +355,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT pour la table `group`
@@ -366,7 +367,7 @@ ALTER TABLE `group`
 -- AUTO_INCREMENT pour la table `media`
 --
 ALTER TABLE `media`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 
 --
 -- AUTO_INCREMENT pour la table `messenger_messages`
@@ -384,7 +385,7 @@ ALTER TABLE `reset_password_request`
 -- AUTO_INCREMENT pour la table `trick`
 --
 ALTER TABLE `trick`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
 
 --
 -- AUTO_INCREMENT pour la table `user`
