@@ -1,7 +1,7 @@
 # SnowTricks
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
-[![SymfonyInsight](https://insight.symfony.com/projects/36172c16-2a0e-44c2-a230-968ae0247675/small.svg)](https://insight.symfony.com/projects/36172c16-2a0e-44c2-a230-968ae0247675)
+[![SymfonyInsight](https://insight.symfony.com/projects/7f26dd7f-2105-4602-9f7c-09761d4c290c/small.svg)](https://insight.symfony.com/projects/7f26dd7f-2105-4602-9f7c-09761d4c290c)
 
 ### Installation
 
