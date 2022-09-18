@@ -451,17 +451,23 @@ button.ghost {
 }
 
 @media screen and (max-width:767px) {
+    #hero-detail {
+        height: 92vh;
+    }
     .btn-comment {
         width: 35%;
-    }
-    .img-media {
-        margin-bottom: 10px;
     }
     #trickMedia {
 		display: none;
 	}
     #seeMedia {
         display: block;
+    }
+}
+
+@media screen and (max-width:1000px) {
+    .img-media {
+        margin-bottom: 10px;
     }
 }
 
@@ -528,6 +534,16 @@ ul.tags {
 
 .input-medias input[type='checkbox'] {
     width: 20px!important;
+}
+
+@media screen and (max-width:767px) {
+    .collection-item {
+        display: flex;
+        flex-direction: column;
+    }
+    .submit-form {
+        width: -webkit-fill-available;
+    }
 }
 
 /* FOOTER */

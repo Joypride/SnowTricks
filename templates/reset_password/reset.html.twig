@@ -1,24 +1,24 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Snowtricks - Mot de passe oublié{% endblock %}
+{% block title %}Snowtricks - Nouveau mot de passe{% endblock %}
 
 {% block content %}
 
 <div class="login-container" id="container">
     <div class="form-container sign-in-container">
         <form class="login-form" action="#">
-            <h1>Mot de passe oublié ?</h1>
+            <h1>Entrez votre nouveau mot de passe</h1>
             {{ form_start(resetForm) }}
             {{ form_row(resetForm.plainPassword) }}
-            <button class="btn btn-primary">Réinitialiser</button>
+            <button class="btn btn-custom">Enregistrer</button>
             {{ form_end(resetForm) }}
         </form>
     </div>
     <div class="overlay-container">
         <div class="overlay">
             <div class="overlay-panel overlay-right">
-                <h1>Pas de panique!</h1>
-                <p>Vous allez recevoir un email vous permettant d'être redirigé vers la page de modification de votre mot de passe.</p>
+                <h1>Dernière étape !</h1>
+                <p>Pour votre sécurité, utilisez un mot de passe difficile à trouver, qui combine des chiffres, des lettres et des caractères spéciaux.</p>
             </div>
         </div>
     </div>
